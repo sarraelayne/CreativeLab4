@@ -3,14 +3,17 @@
 <link href="wbStyle.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <div id="canvas"></div>
-    <button class="button" onclick="changeColor();">Green</button>
-    <button class="button buttonBlue" onclick="changeColor();">Blue</button>
-    <button class="button buttonRed" onclick="changeColor();">Red</button>
-    <button class="button buttonYellow" onclick="changeColor();">Yellow</button>
-    <button class="button buttonGray" onclick="changeColor();">Gray</button>
-    <button class="button buttonBlack" onclick="changeColor();">Black</button>
+    <button class="button buttonGreen" id = "buttonGreen" onclick="changeColor(this.id);">Green</button>
+    <button class="button buttonBlue"  id = "buttonBlue"onclick="changeColor(this.id);">Blue</button>
+    <button class="button buttonRed"  id = "buttonRed"onclick="changeColor(this.id);">Red</button>
+    <button class="button buttonYellow"  id = "buttonYellow"onclick="changeColor(this.id);">Yellow</button>
+    <button class="button buttonGray"  id = "buttonGray"onclick="changeColor(this.id);">Gray</button>
+    <button class="button buttonBlack"  id = "buttonBlack"onclick="changeColor(this.id);">Black</button>
+    <button type='submit'>Save</button>
     
     <script>
         var colorBlue = "#008CBA";
@@ -19,9 +22,10 @@
         var colorRed = "#f44336";
         var colorGray = "#e7e7e7";
         var colorBlack = "#555555";
-        var currColor = colorBlack;
+        var currColor;
         var canvasDiv = document.getElementById('canvas');
         var canvas = document.createElement('canvas');
+        var linesArray = [];
         canvas.setAttribute('width', '1000');
         canvas.setAttribute('height', '500');
         canvas.setAttribute('id', 'canvas');
@@ -32,23 +36,39 @@
         }
         context = canvas.getContext("2d");
         
-        function changeColor() {
-            if ("button") {
+        function changeColor(id) {
+            console.log("clicked");
+            console.log(id);
+            if (id == "buttonGreen") {
+                console.log("green clicked");
+                context.strokeStyle = colorGreen;
+                clickColor.push(colorGreen);
                 currColor = colorGreen;
             }
-            if ("buttonBlue") {
+            else if (id =="buttonBlue") {
+                console.log("blue clicked")
+                context.strokeStyle = colorBlue;
+                clickColor.push(colorBlue);
                 currColor = colorBlue;
             }
-            if ("buttonRed") {
+            else if (id =="buttonRed") {
+                context.strokeStyle = colorRed;
+                clickColor.push(colorRed);
                 currColor = colorRed;
             }
-            if ("buttonYellow") {
+            else if (id =="buttonYellow") {
+                context.strokeStyle = colorYellow;
+                clickColor.push(colorYellow);
                 currColor = colorYellow;
             }
-            if ("buttonGray") {
+            else if (id =="buttonGray") {
+                context.strokeStyle = colorGray;
+                clickColor.push(colorGray);
                 currColor = colorGray;
             }
-            if ("buttonBlack") {
+            else if (id =="buttonBlack") {
+                context.strokeStyle = colorBlack;
+                clickColor.push(colorBlack);
                 currColor = colorBlack;
             }
         }
@@ -77,16 +97,18 @@
         var clickX = new Array();
         var clickY = new Array();
         var clickDrag = new Array();
+        var clickColor = new Array();
         var paint;
         
         function addClick(x,y,dragging) {
             clickX.push(x);
             clickY.push(y);
             clickDrag.push(dragging);
+            clickColor.push(currColor);
         }
         function redraw() {
             context.clearRect(0,0,context.canvas.width,context.canvas.height);
-            context.strokeStyle = currColor;
+            clickColor[0] = colorBlack;
             context.lineJoin = "round";
             context.lineWidth = 5;
             
@@ -99,8 +121,10 @@
                     context.moveTo(clickX[i]-1, clickY[i]);
                 }
                 context.lineTo(clickX[i], clickY[i]);
+                context.strokeStyle = clickColor[i];
                 context.closePath();
                 context.stroke();
+                
             }
         }
     </script>

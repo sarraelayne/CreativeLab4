@@ -1,9 +1,13 @@
+/*body {
+    text-align: center;
+    background-color:  #0d0d0d;
+}*/
 h1 {
   text-align: center;
   font: bold;
   font-size: 40px;
   font-family: 'Baloo Bhaijaan', cursive;
-  background-color: black;
+  background-color: #0047b3;
   color: white;
 }
 /*canvas {
@@ -15,17 +19,18 @@ h1 {
 }*/
 
 .button {
-  background-color: #4CAF50; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  
+  justify-content: center;
 }
+.buttonGreen {background-color: #4CAF50;} /* Green */
 .buttonBlue {background-color: #008CBA;} /* Blue */
 .buttonRed {background-color: #f44336;} /* Red */
 .buttonYellow {background-color: #ffff33; color: black;} /* Yellow */
@@ -34,3 +39,14 @@ h1 {
 .button:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+button[type=submit] {
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+/*
+1) how to get the pen to draw in the right place  //put inside div and move div
+2) how to get the buttons to work
+*/

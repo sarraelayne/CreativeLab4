@@ -11,7 +11,7 @@
     <button class="button buttonBlue"  id = "buttonBlue"onclick="changeColor(this.id);">Blue</button>
     <button class="button buttonRed"  id = "buttonRed"onclick="changeColor(this.id);">Red</button>
     <button class="button buttonYellow"  id = "buttonYellow"onclick="changeColor(this.id);">Yellow</button>
-    <button class="button buttonGray"  id = "buttonGray"onclick="changeColor(this.id);">Gray</button>
+    <button class="button buttonPurple"  id = "buttonPurple"onclick="changeColor(this.id);">Purple</button>
     <button class="button buttonBlack"  id = "buttonBlack"onclick="changeColor(this.id);">Black</button>
     <button type='submit'>Save</button>
     
@@ -20,7 +20,7 @@
         var colorGreen = "#4CAF50";
         var colorYellow = "#ffff33";
         var colorRed = "#f44336";
-        var colorGray = "#e7e7e7";
+        var colorPurple = "#4d004d";
         var colorBlack = "#555555";
         var currColor;
         var canvasDiv = document.getElementById('canvas');
@@ -29,7 +29,7 @@
         canvas.setAttribute('width', '1000');
         canvas.setAttribute('height', '500');
         canvas.setAttribute('id', 'canvas');
-        canvas.style.backgroundColor = "#ddd";
+        canvas.style.backgroundColor = "#f2f2f2";
         canvasDiv.appendChild(canvas);
         if (typeof G_vmlCanvasManager != "undefined") {
             canvas = G_vmlCanvasManager.initElement(canvas);
@@ -61,10 +61,10 @@
                 clickColor.push(colorYellow);
                 currColor = colorYellow;
             }
-            else if (id =="buttonGray") {
-                context.strokeStyle = colorGray;
-                clickColor.push(colorGray);
-                currColor = colorGray;
+            else if (id =="buttonPurple") {
+                context.strokeStyle = colorPurple;
+                clickColor.push(colorPurple);
+                currColor = colorPurple;
             }
             else if (id =="buttonBlack") {
                 context.strokeStyle = colorBlack;
@@ -76,7 +76,6 @@
         $("#canvas").mousedown(function(e) {
             var mouseX = e.pageX-this.offsetLeft;
             var mouseY = e.pageY-this.offsetTop;
-            
             paint = true;
             addClick(e.pageX-this.offsetLeft,e.pageY-this.offsetTop);
             redraw();
@@ -111,20 +110,21 @@
             clickColor[0] = colorBlack;
             context.lineJoin = "round";
             context.lineWidth = 5;
-            
-            for (var i = 0; i < clickX.length; i++) {
+            var arrayIt = 0;
+            for (var i = arrayIt; i < clickX.length; i++) {
                 context.beginPath();
+                arrayIt++;
                 if(clickDrag[i] && i) {
+                    context.strokeStyle = clickColor[i];
                     context.moveTo(clickX[i-1],clickY[i-1]);
                 }
                 else {
+                    context.strokeStyle = clickColor[i];
                     context.moveTo(clickX[i]-1, clickY[i]);
                 }
                 context.lineTo(clickX[i], clickY[i]);
-                context.strokeStyle = clickColor[i];
                 context.closePath();
                 context.stroke();
-                
             }
         }
     </script>

@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+<html>
     <div id="canvas"></div>
     <button class="button buttonGreen" id = "buttonGreen" onclick="changeColor(this.id);">Green</button>
     <button class="button buttonBlue"  id = "buttonBlue"onclick="changeColor(this.id);">Blue</button>
@@ -13,9 +13,14 @@
     <button class="button buttonYellow"  id = "buttonYellow"onclick="changeColor(this.id);">Yellow</button>
     <button class="button buttonPurple"  id = "buttonPurple"onclick="changeColor(this.id);">Purple</button>
     <button class="button buttonBlack"  id = "buttonBlack"onclick="changeColor(this.id);">Black</button>
-    <button type='submit'>Save</button>
-    
+    <form>
+        <form>
+                Enter a word: <input type="text" id="owlform" value=""><br/>
+                <button id="owlbutton">Submit</button>
+            </form>
+            Definition: <span id="owldef">Empty</span>
     <script>
+    /*global $*/
         var colorBlue = "#008CBA";
         var colorGreen = "#4CAF50";
         var colorYellow = "#ffff33";
@@ -127,4 +132,20 @@
                 context.stroke();
             }
         }
+        $("#owlbutton").click(function(event) {
+            event.preventDefault();
+            var url ="owl?q=" + $("#owlform").val();
+            console.log(url);
+            $.getJSON(url, function(data) {
+                var everything;
+                everything = "<ul>";
+                $.each(data, function(i,item) {
+                    everything += "<li>"+data[i].defenition+"</li>";
+                });
+                everything += "</ul>";
+                console.log(everything);
+                $("#owldef").html(everything);
+            });
+        });
     </script>
+</html>   
